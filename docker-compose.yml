@@ -1,0 +1,24 @@
+version: '3.9'
+services:
+  web:
+#    build: .
+    build: https://github.com/alexandergrib/django_template.git#docker
+    command: gunicorn django_settings.wsgi:application --bind 0.0.0.0:8000
+    container_name: django_app_dev
+    volumes:
+      - .:/usr/src/django/
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./.env
+    restart: always
+#
+#  static:
+#    container_name: nginx_staticfiles
+#    build:
+#      context: nginx
+#      dockerfile: ./nginx.Dockerfile
+#    depends_on:
+#      - web
+#    restart: always
+
